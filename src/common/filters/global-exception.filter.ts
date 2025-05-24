@@ -44,6 +44,15 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       }
     }
 
+    // log the error details for debugging if in development mode
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error details:', {
+        message,
+        stack: (exception as Error).stack,
+        errors,
+      });
+    }
+
     response.status(status).json({
       success: false,
       message,
