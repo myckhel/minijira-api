@@ -1,0 +1,3985 @@
+{
+	"info": {
+		"_postman_id": "d77c43eb-7110-4445-96ed-1dd845b451a9",
+		"name": "Mini Jira Clone API",
+		"description": "Comprehensive API collection for the Mini Jira Clone backend built with NestJS and Prisma",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9558301"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.data && response.data.token) {",
+									"        pm.collectionVariables.set('auth_token', response.data.token);",
+									"        pm.collectionVariables.set('user_id', response.data.user.id);",
+									"    } else if (response.token) {",
+									"        pm.collectionVariables.set('auth_token', response.token);",
+									"        pm.collectionVariables.set('user_id', response.user.id);",
+									"    }",
+									"    pm.test('Registration successful', function () {",
+									"        pm.response.to.have.status(201);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register a new user account"
+					},
+					"response": [
+						{
+							"name": "Register User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "456"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c8-wNUhRk0oy/KiyT5TcEeyvf9b3Ko\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:02:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": \"450c4bc2-0b17-4e56-a266-bebd04dbcc9e\",\n            \"email\": \"john.doe@example.com\",\n            \"name\": \"John Doe\",\n            \"role\": \"USER\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T01:02:27.650Z\"\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NTBjNGJjMi0wYjE3LTRlNTYtYTI2Ni1iZWJkMDRkYmNjOWUiLCJlbWFpbCI6ImpvaG4uZG9lQGV4YW1wbGUuY29tIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDgwNDg1NDcsImV4cCI6MTc0ODY1MzM0N30.HPOCZBaKLi6pKozJsWEUli6Il8ljry5VI56zTqRgJ54\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    const response = pm.response.json();",
+									"    if (response.data && response.data.token) {",
+									"        pm.collectionVariables.set('auth_token', response.data.token);",
+									"        pm.collectionVariables.set('user_id', response.data.user.id);",
+									"    } else if (response.token) {",
+									"        pm.collectionVariables.set('auth_token', response.token);",
+									"        pm.collectionVariables.set('user_id', response.user.id);",
+									"    }",
+									"    pm.test('Login successful', function () {",
+									"        pm.response.to.have.status(200);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "Authenticate user and get JWT token"
+					},
+					"response": [
+						{
+							"name": "Login User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "email",
+											"value": "admin@minijira.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "admin123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "456"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c8-NMbs0MIF5lVku3hcHifXikSi1Pw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:02:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"email\": \"admin@minijira.com\",\n            \"name\": \"Admin User\",\n            \"role\": \"ADMIN\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.508Z\"\n        },\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjOTg1NmMyNi01NzhhLTQwYjMtOGExZi0zYmI3NDk5ZjUwZjQiLCJlbWFpbCI6ImFkbWluQG1pbmlqaXJhLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc0ODA0ODUyOSwiZXhwIjoxNzQ4NjUzMzI5fQ.3gYmKWbIQlKVHpUeyp6OCaetH_ledSoHIrW2ukCbvIM\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Authentication endpoints for user registration and login"
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get Current User Profile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/me",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						},
+						"description": "Get the profile of the currently authenticated user"
+					},
+					"response": [
+						{
+							"name": "Get Current User Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/users/me",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "265"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"109-Oq76AyowZg2PYOtZuq56k3/aclQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:02:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"450c4bc2-0b17-4e56-a266-bebd04dbcc9e\",\n        \"email\": \"john.doe@example.com\",\n        \"name\": \"John Doe\",\n        \"role\": \"USER\",\n        \"avatarUrl\": null,\n        \"createdAt\": \"2025-05-24T01:02:27.650Z\",\n        \"updatedAt\": \"2025-05-24T01:02:27.650Z\",\n        \"assignedTasks\": [],\n        \"ownedProjects\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Users (Admin Only)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Get list of all users (admin only)"
+					},
+					"response": [
+						{
+							"name": "403",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"6e-EJH+vlASCIsM6MY/rzod+uZPUdc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:02:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"message\": \"Forbidden resource\",\n    \"timestamp\": \"2025-05-24T01:02:50.982Z\",\n    \"path\": \"/api/v1/users\"\n}"
+						},
+						{
+							"name": "Get All Users (Admin Only)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1045"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"415-o/xyQn1uyiMeJkhuT2SnZpmnKiI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:03:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"email\": \"admin@minijira.com\",\n            \"name\": \"Admin User\",\n            \"role\": \"ADMIN\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.508Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.508Z\"\n        },\n        {\n            \"id\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n            \"email\": \"user@minijira.com\",\n            \"name\": \"Regular User\",\n            \"role\": \"USER\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.766Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.766Z\"\n        },\n        {\n            \"id\": \"e5244dd4-c6e6-4f98-97e1-c8658fa71aa4\",\n            \"email\": \"test@example.com\",\n            \"name\": \"Test User\",\n            \"role\": \"USER\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T00:28:43.641Z\",\n            \"updatedAt\": \"2025-05-24T00:28:43.641Z\"\n        },\n        {\n            \"id\": \"c1c7e2c8-3003-45d9-a98b-244b80f82de0\",\n            \"email\": \"testuser@example.com\",\n            \"name\": \"Test User\",\n            \"role\": \"USER\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T00:38:03.570Z\",\n            \"updatedAt\": \"2025-05-24T00:38:03.570Z\"\n        },\n        {\n            \"id\": \"450c4bc2-0b17-4e56-a266-bebd04dbcc9e\",\n            \"email\": \"john.doe@example.com\",\n            \"name\": \"John Doe\",\n            \"role\": \"USER\",\n            \"avatarUrl\": null,\n            \"createdAt\": \"2025-05-24T01:02:27.650Z\",\n            \"updatedAt\": \"2025-05-24T01:02:27.650Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Get user details by ID"
+					},
+					"response": [
+						{
+							"name": "Get User by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "757"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f5-v1e/LhxvkZ6XiCHxeCT8Kgp1vAY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:03:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"email\": \"admin@minijira.com\",\n        \"name\": \"Admin User\",\n        \"role\": \"ADMIN\",\n        \"avatarUrl\": null,\n        \"createdAt\": \"2025-05-24T00:23:12.508Z\",\n        \"updatedAt\": \"2025-05-24T00:23:12.508Z\",\n        \"assignedTasks\": [\n            {\n                \"id\": \"task-setup-project-infrastructure\",\n                \"title\": \"Setup project infrastructure\",\n                \"status\": \"DONE\",\n                \"priority\": \"HIGH\",\n                \"project\": {\n                    \"id\": \"sample-project-id\",\n                    \"name\": \"Sample Project\"\n                }\n            },\n            {\n                \"id\": \"task-implement-authentication\",\n                \"title\": \"Implement authentication\",\n                \"status\": \"IN_PROGRESS\",\n                \"priority\": \"HIGH\",\n                \"project\": {\n                    \"id\": \"sample-project-id\",\n                    \"name\": \"Sample Project\"\n                }\n            }\n        ],\n        \"ownedProjects\": [\n            {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"description\": \"A sample project to demonstrate the Mini Jira Clone\",\n                \"_count\": {\n                    \"tasks\": 5\n                }\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Profile",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe Updated\",\n  \"avatarUrl\": \"https://example.com/avatar.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Update user profile (users can update their own profile, admins can update any profile)"
+					},
+					"response": [
+						{
+							"name": "Update User Profile",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"John Doe Updated\",\n  \"avatarUrl\": \"https://example.com/avatar.jpg\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/users/{{user_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"users",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "262"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"106-goCT4RSTKWS8jVBjEa02JrOpaVY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:06:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"email\": \"admin@minijira.com\",\n        \"name\": \"John Doe Updated\",\n        \"role\": \"ADMIN\",\n        \"avatarUrl\": \"https://example.com/avatar.jpg\",\n        \"createdAt\": \"2025-05-24T00:23:12.508Z\",\n        \"updatedAt\": \"2025-05-24T01:06:03.384Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete User (Admin Only)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/users/{{user_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"{{user_id}}"
+							]
+						},
+						"description": "Delete a user account (admin only)"
+					},
+					"response": []
+				}
+			],
+			"description": "User management endpoints"
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Create Project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.data && response.data.id) {",
+									"        pm.collectionVariables.set('project_id', response.data.id);",
+									"    } else if (response.id) {",
+									"        pm.collectionVariables.set('project_id', response.id);",
+									"    }",
+									"    pm.test('Project created successfully', function () {",
+									"        pm.response.to.have.status(201);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Sample Project\",\n  \"description\": \"A sample project for testing\",\n  \"color\": \"#6366f1\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects"
+							]
+						},
+						"description": "Create a new project"
+					},
+					"response": [
+						{
+							"name": "Create Project",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Sample Project\",\n  \"description\": \"A sample project for testing\",\n  \"color\": \"#6366f1\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "430"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ae-USAfl9xGwDeqBVUG46RXbb6GC+o\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:06:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"9753ecd2-ae52-40af-b41d-7c4e5ba5d9d9\",\n        \"name\": \"Sample Project\",\n        \"description\": \"A sample project for testing\",\n        \"color\": \"#6366f1\",\n        \"ownerId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"createdAt\": \"2025-05-24T01:06:44.627Z\",\n        \"updatedAt\": \"2025-05-24T01:06:44.627Z\",\n        \"deletedAt\": null,\n        \"owner\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\"\n        },\n        \"_count\": {\n            \"tasks\": 0\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/projects",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects"
+							]
+						},
+						"description": "Get all projects accessible to the user"
+					},
+					"response": [
+						{
+							"name": "Get All Projects",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1259"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4eb-tRZCaIIClaN9X1a11rC+3is3za4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:06:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"9753ecd2-ae52-40af-b41d-7c4e5ba5d9d9\",\n            \"name\": \"Sample Project\",\n            \"description\": \"A sample project for testing\",\n            \"color\": \"#6366f1\",\n            \"ownerId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"createdAt\": \"2025-05-24T01:06:44.627Z\",\n            \"updatedAt\": \"2025-05-24T01:06:44.627Z\",\n            \"deletedAt\": null,\n            \"owner\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\"\n            },\n            \"_count\": {\n                \"tasks\": 0\n            }\n        },\n        {\n            \"id\": \"f2306dda-ead4-45ae-9243-48960a737199\",\n            \"name\": \"Updated WebSocket Test Project\",\n            \"description\": \"Testing real-time features\",\n            \"color\": \"#10B981\",\n            \"ownerId\": \"c1c7e2c8-3003-45d9-a98b-244b80f82de0\",\n            \"createdAt\": \"2025-05-24T00:38:12.947Z\",\n            \"updatedAt\": \"2025-05-24T00:40:56.610Z\",\n            \"deletedAt\": null,\n            \"owner\": {\n                \"id\": \"c1c7e2c8-3003-45d9-a98b-244b80f82de0\",\n                \"name\": \"Test User\",\n                \"email\": \"testuser@example.com\"\n            },\n            \"_count\": {\n                \"tasks\": 1\n            }\n        },\n        {\n            \"id\": \"sample-project-id\",\n            \"name\": \"Sample Project\",\n            \"description\": \"A sample project to demonstrate the Mini Jira Clone\",\n            \"color\": \"#6366f1\",\n            \"ownerId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"createdAt\": \"2025-05-24T00:23:12.767Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.767Z\",\n            \"deletedAt\": null,\n            \"owner\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\"\n            },\n            \"_count\": {\n                \"tasks\": 5\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Project by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/projects/{{project_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects",
+								"{{project_id}}"
+							]
+						},
+						"description": "Get project details by ID"
+					},
+					"response": [
+						{
+							"name": "Get Project by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/projects/{{project_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"projects",
+										"{{project_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "420"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a4-OHIU9hX4SbrudHEvukzuLb0Vpss\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:07:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"9753ecd2-ae52-40af-b41d-7c4e5ba5d9d9\",\n        \"name\": \"Sample Project\",\n        \"description\": \"A sample project for testing\",\n        \"color\": \"#6366f1\",\n        \"ownerId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"createdAt\": \"2025-05-24T01:06:44.627Z\",\n        \"updatedAt\": \"2025-05-24T01:06:44.627Z\",\n        \"deletedAt\": null,\n        \"owner\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\"\n        },\n        \"tasks\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Updated Project Name\",\n  \"description\": \"Updated project description\",\n  \"color\": \"#10B981\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/projects/{{project_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects",
+								"{{project_id}}"
+							]
+						},
+						"description": "Update project details"
+					},
+					"response": [
+						{
+							"name": "Update Project",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Updated Project Name\",\n  \"description\": \"Updated project description\",\n  \"color\": \"#10B981\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/projects/{{project_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"projects",
+										"{{project_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "435"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b3-oXoB4FyMdEdd6d9sl0865Z/F7/k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:07:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"9753ecd2-ae52-40af-b41d-7c4e5ba5d9d9\",\n        \"name\": \"Updated Project Name\",\n        \"description\": \"Updated project description\",\n        \"color\": \"#10B981\",\n        \"ownerId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"createdAt\": \"2025-05-24T01:06:44.627Z\",\n        \"updatedAt\": \"2025-05-24T01:07:24.940Z\",\n        \"deletedAt\": null,\n        \"owner\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\"\n        },\n        \"_count\": {\n            \"tasks\": 0\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/projects/{{project_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"projects",
+								"{{project_id}}"
+							]
+						},
+						"description": "Delete a project"
+					},
+					"response": [
+						{
+							"name": "Delete Project",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/projects/{{project_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"projects",
+										"{{project_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "138"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a-a2XafnUQZ8e+0bWVF1HzkahCJ+U\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:07:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"9753ecd2-ae52-40af-b41d-7c4e5ba5d9d9\",\n        \"name\": \"Updated Project Name\",\n        \"deletedAt\": \"2025-05-24T01:07:36.183Z\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Project management endpoints"
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "Create Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.data && response.data.id) {",
+									"        pm.collectionVariables.set('task_id', response.data.id);",
+									"    } else if (response.id) {",
+									"        pm.collectionVariables.set('task_id', response.id);",
+									"    }",
+									"    pm.test('Task created successfully', function () {",
+									"        pm.response.to.have.status(201);",
+									"    });",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Sample Task\",\n  \"description\": \"A sample task for testing\",\n  \"projectId\": \"{{project_id}}\",\n  \"status\": \"TODO\",\n  \"priority\": \"MEDIUM\",\n  \"assigneeId\": \"{{user_id}}\",\n  \"dueDate\": \"2024-12-31T23:59:59Z\",\n  \"position\": 0\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						},
+						"description": "Create a new task"
+					},
+					"response": [
+						{
+							"name": "Create Task",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Sample Task\",\n  \"description\": \"A sample task for testing\",\n  \"projectId\": \"{{project_id}}\",\n  \"status\": \"TODO\",\n  \"priority\": \"MEDIUM\",\n  \"assigneeId\": \"{{user_id}}\",\n  \"dueDate\": \"2024-12-31T23:59:59Z\",\n  \"position\": 0\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "672"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a0-anIjr+K8xNlUb7EbE3aBmnU/RMI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:08:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Sample Task\",\n        \"description\": \"A sample task for testing\",\n        \"status\": \"TODO\",\n        \"priority\": \"MEDIUM\",\n        \"position\": 0,\n        \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n        \"dueDate\": \"2024-12-31T23:59:59.000Z\",\n        \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n        \"updatedAt\": \"2025-05-24T01:08:25.219Z\",\n        \"deletedAt\": null,\n        \"assignee\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\",\n            \"avatarUrl\": \"https://example.com/avatar.jpg\"\n        },\n        \"project\": {\n            \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"name\": \"Sample Project\",\n            \"color\": \"#6366f1\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "20",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "TODO",
+									"disabled": true
+								},
+								{
+									"key": "priority",
+									"value": "HIGH",
+									"disabled": true
+								},
+								{
+									"key": "projectId",
+									"value": "{{project_id}}",
+									"disabled": true
+								},
+								{
+									"key": "assigneeId",
+									"value": "{{user_id}}",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "sample",
+									"disabled": true
+								},
+								{
+									"key": "sortBy",
+									"value": "createdAt",
+									"disabled": true
+								},
+								{
+									"key": "sortOrder",
+									"value": "desc",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Get all tasks with optional filters and pagination"
+					},
+					"response": [
+						{
+							"name": "Get All Tasks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "20",
+											"disabled": true
+										},
+										{
+											"key": "status",
+											"value": "TODO",
+											"disabled": true
+										},
+										{
+											"key": "priority",
+											"value": "HIGH",
+											"disabled": true
+										},
+										{
+											"key": "projectId",
+											"value": "{{project_id}}",
+											"disabled": true
+										},
+										{
+											"key": "assigneeId",
+											"value": "{{user_id}}",
+											"disabled": true
+										},
+										{
+											"key": "search",
+											"value": "sample",
+											"disabled": true
+										},
+										{
+											"key": "sortBy",
+											"value": "createdAt",
+											"disabled": true
+										},
+										{
+											"key": "sortOrder",
+											"value": "desc",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "4006"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"fa6-56iaO8Q2j7FaC2cLbol/zwn58sc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:08:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n            \"title\": \"Sample Task\",\n            \"description\": \"A sample task for testing\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"dueDate\": \"2024-12-31T23:59:59.000Z\",\n            \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n            \"updatedAt\": \"2025-05-24T01:08:25.219Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"6d4ec5ac-a562-4836-8dd0-85097329a6e5\",\n            \"title\": \"Test Task\",\n            \"description\": \"Testing WebSocket events\",\n            \"status\": \"IN_PROGRESS\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": null,\n            \"projectId\": \"f2306dda-ead4-45ae-9243-48960a737199\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:38:26.468Z\",\n            \"updatedAt\": \"2025-05-24T00:40:45.544Z\",\n            \"deletedAt\": null,\n            \"assignee\": null,\n            \"project\": {\n                \"id\": \"f2306dda-ead4-45ae-9243-48960a737199\",\n                \"name\": \"Updated WebSocket Test Project\",\n                \"color\": \"#10B981\"\n            }\n        },\n        {\n            \"id\": \"task-add-real-time-updates\",\n            \"title\": \"Add real-time updates\",\n            \"description\": \"Implement WebSocket for real-time task updates\",\n            \"status\": \"TODO\",\n            \"priority\": \"LOW\",\n            \"position\": 1,\n            \"assigneeId\": null,\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.771Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.771Z\",\n            \"deletedAt\": null,\n            \"assignee\": null,\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-design-ui-components\",\n            \"title\": \"Design UI components\",\n            \"description\": \"Create reusable UI components for the frontend\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 2,\n            \"assigneeId\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.771Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.771Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n                \"name\": \"Regular User\",\n                \"email\": \"user@minijira.com\",\n                \"avatarUrl\": null\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-create-task-management\",\n            \"title\": \"Create task management\",\n            \"description\": \"Implement CRUD operations for tasks\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.770Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.770Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n                \"name\": \"Regular User\",\n                \"email\": \"user@minijira.com\",\n                \"avatarUrl\": null\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-implement-authentication\",\n            \"title\": \"Implement authentication\",\n            \"description\": \"Add JWT-based authentication system\",\n            \"status\": \"IN_PROGRESS\",\n            \"priority\": \"HIGH\",\n            \"position\": 1,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.769Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.769Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-setup-project-infrastructure\",\n            \"title\": \"Setup project infrastructure\",\n            \"description\": \"Initialize the project with NestJS and Prisma\",\n            \"status\": \"DONE\",\n            \"priority\": \"HIGH\",\n            \"position\": 0,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.768Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.768Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"total\": 7,\n        \"page\": 1,\n        \"limit\": 20,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Tasks by Status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks?status=TODO",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "TODO"
+								}
+							]
+						},
+						"description": "Get tasks filtered by status (TODO, IN_PROGRESS, DONE)"
+					},
+					"response": [
+						{
+							"name": "Get Tasks by Status",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks?status=TODO",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "status",
+											"value": "TODO"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2303"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8ff-qLpayD5lk+PYjlxEzLzwt6luY7U\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:08:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n            \"title\": \"Sample Task\",\n            \"description\": \"A sample task for testing\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"dueDate\": \"2024-12-31T23:59:59.000Z\",\n            \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n            \"updatedAt\": \"2025-05-24T01:08:25.219Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-add-real-time-updates\",\n            \"title\": \"Add real-time updates\",\n            \"description\": \"Implement WebSocket for real-time task updates\",\n            \"status\": \"TODO\",\n            \"priority\": \"LOW\",\n            \"position\": 1,\n            \"assigneeId\": null,\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.771Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.771Z\",\n            \"deletedAt\": null,\n            \"assignee\": null,\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-design-ui-components\",\n            \"title\": \"Design UI components\",\n            \"description\": \"Create reusable UI components for the frontend\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 2,\n            \"assigneeId\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.771Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.771Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n                \"name\": \"Regular User\",\n                \"email\": \"user@minijira.com\",\n                \"avatarUrl\": null\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-create-task-management\",\n            \"title\": \"Create task management\",\n            \"description\": \"Implement CRUD operations for tasks\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.770Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.770Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"85fb8873-bddc-4455-aabb-af32b489436c\",\n                \"name\": \"Regular User\",\n                \"email\": \"user@minijira.com\",\n                \"avatarUrl\": null\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"total\": 4,\n        \"page\": 1,\n        \"limit\": 20,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Tasks by Priority",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks?priority=HIGH",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": "HIGH"
+								}
+							]
+						},
+						"description": "Get tasks filtered by priority (LOW, MEDIUM, HIGH)"
+					},
+					"response": [
+						{
+							"name": "Get Tasks by Priority",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks?priority=HIGH",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "priority",
+											"value": "HIGH"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1310"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"51e-ivpVwBvrZmfpFNTGl5xkw8qcbXY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:08:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"task-implement-authentication\",\n            \"title\": \"Implement authentication\",\n            \"description\": \"Add JWT-based authentication system\",\n            \"status\": \"IN_PROGRESS\",\n            \"priority\": \"HIGH\",\n            \"position\": 1,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.769Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.769Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        },\n        {\n            \"id\": \"task-setup-project-infrastructure\",\n            \"title\": \"Setup project infrastructure\",\n            \"description\": \"Initialize the project with NestJS and Prisma\",\n            \"status\": \"DONE\",\n            \"priority\": \"HIGH\",\n            \"position\": 0,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"sample-project-id\",\n            \"dueDate\": null,\n            \"createdAt\": \"2025-05-24T00:23:12.768Z\",\n            \"updatedAt\": \"2025-05-24T00:23:12.768Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"sample-project-id\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"total\": 2,\n        \"page\": 1,\n        \"limit\": 20,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Tasks by Project",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks?projectId={{project_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "{{project_id}}"
+								}
+							]
+						},
+						"description": "Get tasks filtered by project ID"
+					},
+					"response": [
+						{
+							"name": "Get Tasks by Project",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks?projectId={{project_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "projectId",
+											"value": "{{project_id}}"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "728"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d8-zf9NGlHBlC7zKzSP/GGg4E2L1oY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:08:55 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n            \"title\": \"Sample Task\",\n            \"description\": \"A sample task for testing\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"dueDate\": \"2024-12-31T23:59:59.000Z\",\n            \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n            \"updatedAt\": \"2025-05-24T01:08:25.219Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"total\": 1,\n        \"page\": 1,\n        \"limit\": 20,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Tasks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks?search=sample&sortBy=title&sortOrder=asc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "sample"
+								},
+								{
+									"key": "sortBy",
+									"value": "title"
+								},
+								{
+									"key": "sortOrder",
+									"value": "asc"
+								}
+							]
+						},
+						"description": "Search tasks by title or description with sorting"
+					},
+					"response": [
+						{
+							"name": "Search Tasks",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks?search=sample&sortBy=title&sortOrder=asc",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "sample"
+										},
+										{
+											"key": "sortBy",
+											"value": "title"
+										},
+										{
+											"key": "sortOrder",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "728"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d8-zf9NGlHBlC7zKzSP/GGg4E2L1oY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:32:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n            \"title\": \"Sample Task\",\n            \"description\": \"A sample task for testing\",\n            \"status\": \"TODO\",\n            \"priority\": \"MEDIUM\",\n            \"position\": 0,\n            \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"dueDate\": \"2024-12-31T23:59:59.000Z\",\n            \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n            \"updatedAt\": \"2025-05-24T01:08:25.219Z\",\n            \"deletedAt\": null,\n            \"assignee\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\",\n                \"avatarUrl\": \"https://example.com/avatar.jpg\"\n            },\n            \"project\": {\n                \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n                \"name\": \"Sample Project\",\n                \"color\": \"#6366f1\"\n            }\n        }\n    ],\n    \"meta\": {\n        \"total\": 1,\n        \"page\": 1,\n        \"limit\": 20,\n        \"totalPages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Task by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						},
+						"description": "Get task details by ID"
+					},
+					"response": [
+						{
+							"name": "Get Task by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "781"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30d-43ilw9saibWQzutrfFa6aanYpE4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:32:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Sample Task\",\n        \"description\": \"A sample task for testing\",\n        \"status\": \"TODO\",\n        \"priority\": \"MEDIUM\",\n        \"position\": 0,\n        \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n        \"dueDate\": \"2024-12-31T23:59:59.000Z\",\n        \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n        \"updatedAt\": \"2025-05-24T01:08:25.219Z\",\n        \"deletedAt\": null,\n        \"assignee\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\",\n            \"avatarUrl\": \"https://example.com/avatar.jpg\"\n        },\n        \"project\": {\n            \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"name\": \"Sample Project\",\n            \"color\": \"#6366f1\",\n            \"owner\": {\n                \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n                \"name\": \"John Doe Updated\",\n                \"email\": \"admin@minijira.com\"\n            }\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Task",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Updated Task Title\",\n  \"description\": \"Updated task description\",\n  \"status\": \"IN_PROGRESS\",\n  \"priority\": \"HIGH\",\n  \"dueDate\": \"2024-12-25T23:59:59Z\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						},
+						"description": "Update task details"
+					},
+					"response": [
+						{
+							"name": "Update Task",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Updated Task Title\",\n  \"description\": \"Updated task description\",\n  \"status\": \"IN_PROGRESS\",\n  \"priority\": \"HIGH\",\n  \"dueDate\": \"2024-12-25T23:59:59Z\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "683"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ab-EDw2c7q/fm1u/h0064fr1x936Ug\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:33:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Updated Task Title\",\n        \"description\": \"Updated task description\",\n        \"status\": \"IN_PROGRESS\",\n        \"priority\": \"HIGH\",\n        \"position\": 0,\n        \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n        \"dueDate\": \"2024-12-25T23:59:59.000Z\",\n        \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n        \"updatedAt\": \"2025-05-24T01:33:03.739Z\",\n        \"deletedAt\": null,\n        \"assignee\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\",\n            \"avatarUrl\": \"https://example.com/avatar.jpg\"\n        },\n        \"project\": {\n            \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"name\": \"Sample Project\",\n            \"color\": \"#6366f1\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Assign Task to User",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"assigneeId\": \"{{user_id}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						},
+						"description": "Assign a task to a specific user"
+					},
+					"response": [
+						{
+							"name": "Assign Task to User",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"assigneeId\": \"{{user_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "683"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ab-AQph+IxMIUFqODE/tiXkhWuOUM4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:33:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Updated Task Title\",\n        \"description\": \"Updated task description\",\n        \"status\": \"IN_PROGRESS\",\n        \"priority\": \"HIGH\",\n        \"position\": 0,\n        \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n        \"dueDate\": \"2024-12-25T23:59:59.000Z\",\n        \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n        \"updatedAt\": \"2025-05-24T01:33:12.697Z\",\n        \"deletedAt\": null,\n        \"assignee\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\",\n            \"avatarUrl\": \"https://example.com/avatar.jpg\"\n        },\n        \"project\": {\n            \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"name\": \"Sample Project\",\n            \"color\": \"#6366f1\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Task Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"DONE\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						},
+						"description": "Update task status (TODO, IN_PROGRESS, DONE)"
+					},
+					"response": [
+						{
+							"name": "Update Task Status",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"DONE\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "676"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a4-ynNb/X0oUA4jVv5sv6IGgwFDqGg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:33:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Updated Task Title\",\n        \"description\": \"Updated task description\",\n        \"status\": \"DONE\",\n        \"priority\": \"HIGH\",\n        \"position\": 0,\n        \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n        \"dueDate\": \"2024-12-25T23:59:59.000Z\",\n        \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n        \"updatedAt\": \"2025-05-24T01:33:18.171Z\",\n        \"deletedAt\": null,\n        \"assignee\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\",\n            \"avatarUrl\": \"https://example.com/avatar.jpg\"\n        },\n        \"project\": {\n            \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"name\": \"Sample Project\",\n            \"color\": \"#6366f1\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Task Priority",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"priority\": \"HIGH\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						},
+						"description": "Update task priority (LOW, MEDIUM, HIGH)"
+					},
+					"response": [
+						{
+							"name": "Update Task Priority",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"priority\": \"HIGH\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "676"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a4-5UnVGi6UKAhvsKBR21oBjk9W2NA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:33:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Updated Task Title\",\n        \"description\": \"Updated task description\",\n        \"status\": \"DONE\",\n        \"priority\": \"HIGH\",\n        \"position\": 0,\n        \"assigneeId\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n        \"projectId\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n        \"dueDate\": \"2024-12-25T23:59:59.000Z\",\n        \"createdAt\": \"2025-05-24T01:08:25.219Z\",\n        \"updatedAt\": \"2025-05-24T01:33:23.147Z\",\n        \"deletedAt\": null,\n        \"assignee\": {\n            \"id\": \"c9856c26-578a-40b3-8a1f-3bb7499f50f4\",\n            \"name\": \"John Doe Updated\",\n            \"email\": \"admin@minijira.com\",\n            \"avatarUrl\": \"https://example.com/avatar.jpg\"\n        },\n        \"project\": {\n            \"id\": \"edb583e5-32c0-466c-b59b-7118c1545411\",\n            \"name\": \"Sample Project\",\n            \"color\": \"#6366f1\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Reorder Tasks (Drag & Drop)",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"tasks\": [\n    {\n      \"id\": \"task-id-1\",\n      \"position\": 0,\n      \"status\": \"TODO\"\n    },\n    {\n      \"id\": \"task-id-2\",\n      \"position\": 1,\n      \"status\": \"IN_PROGRESS\"\n    },\n    {\n      \"id\": \"task-id-3\",\n      \"position\": 2,\n      \"status\": \"DONE\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/projects/{{project_id}}/reorder",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"projects",
+								"{{project_id}}",
+								"reorder"
+							]
+						},
+						"description": "Reorder tasks within a project (for Kanban drag & drop functionality)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Task",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{auth_token}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_id}}"
+							]
+						},
+						"description": "Delete a task (soft delete)"
+					},
+					"response": [
+						{
+							"name": "Delete Task",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "http://localhost:5173"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Access-Control-Allow-Credentials",
+									"value": "true"
+								},
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000; includeSubDomains"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "137"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"89-/XIhWeq5ctCQQnYQ0EPp9DZ7SP0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 24 May 2025 01:34:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"id\": \"27bbe281-89b0-48f8-b435-bc843e4792df\",\n        \"title\": \"Updated Task Title\",\n        \"deletedAt\": \"2025-05-24T01:34:04.147Z\"\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Task management endpoints with CRUD operations, filtering, and reordering"
+		},
+		{
+			"name": "Example Workflows",
+			"item": [
+				{
+					"name": "Complete User Journey",
+					"item": [
+						{
+							"name": "1. Register New User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"password\": \"testpassword123\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/register",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2. Login User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"testpassword123\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/auth/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3. Create Project",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"My First Project\",\n  \"description\": \"This is my first project\",\n  \"color\": \"#3B82F6\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/projects",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"projects"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4. Create Tasks",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Setup Development Environment\",\n  \"description\": \"Install Node.js, NestJS CLI, and setup the project\",\n  \"projectId\": \"{{project_id}}\",\n  \"status\": \"TODO\",\n  \"priority\": \"HIGH\",\n  \"assigneeId\": \"{{user_id}}\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "5. Update Task Progress",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{auth_token}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"IN_PROGRESS\",\n  \"description\": \"Currently installing dependencies and configuring the development environment\"\n}"
+								},
+								"url": {
+									"raw": "{{base_url}}/tasks/{{task_id}}",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"tasks",
+										"{{task_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Example workflows demonstrating typical API usage patterns"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{auth_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Set default headers if needed",
+					"pm.request.headers.add({",
+					"    key: 'Accept',",
+					"    value: 'application/json'",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"// Global test to check for common errors",
+					"pm.test('Response should not have errors', function () {",
+					"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+					"});",
+					"",
+					"// Log response for debugging",
+					"console.log('Response:', pm.response.json());"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "project_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "task_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
