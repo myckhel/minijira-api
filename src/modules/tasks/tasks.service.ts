@@ -98,24 +98,55 @@ export class TasksService {
       sortOrder,
     } = filterDto;
 
-    // Build where clause
-    const where: any = {};
+    // Build where clause with proper typing
+    const where: {
+      deletedAt?: null;
+      status?: string;
+      priority?: string;
+      assigneeId?: string;
+      projectId?: string;
+      OR?: Array<any>;
+      AND?: Array<any>;
+    } = {
+      deletedAt: null, // Exclude soft-deleted tasks
+    };
 
     if (status) where.status = status;
     if (priority) where.priority = priority;
     if (assigneeId) where.assigneeId = assigneeId;
     if (projectId) where.projectId = projectId;
 
-    if (search) {
-      where.OR = [
-        { title: { contains: search, mode: 'insensitive' } },
-        { description: { contains: search, mode: 'insensitive' } },
-      ];
-    }
-
+    // Build search and access control conditions properly
     // If not admin, only show tasks from user's projects or assigned to user
     if (userRole !== Role.ADMIN) {
-      where.OR = [{ project: { ownerId: userId } }, { assigneeId: userId }];
+      const accessConditions = [
+        { project: { ownerId: userId } },
+        { assigneeId: userId },
+      ];
+
+      if (search) {
+        // Combine search with access control using AND logic
+        // Note: SQLite doesn't support mode: 'insensitive', so we use contains directly
+        where.AND = [
+          {
+            OR: [
+              { title: { contains: search } },
+              { description: { contains: search } },
+            ],
+          },
+          { OR: accessConditions },
+        ];
+      } else {
+        // Just access control
+        where.OR = accessConditions;
+      }
+    } else if (search) {
+      // Admin with search - just add search conditions
+      // Note: SQLite doesn't support mode: 'insensitive', so we use contains directly
+      where.OR = [
+        { title: { contains: search } },
+        { description: { contains: search } },
+      ];
     }
 
     // Calculate pagination
@@ -123,8 +154,8 @@ export class TasksService {
     const limitNum = limit || 20;
     const skip = (pageNum - 1) * limitNum;
 
-    // Build order by
-    const orderBy: any = {};
+    // Build order by with proper typing
+    const orderBy: Record<string, any> = {};
     const sortByField = sortBy || 'createdAt';
     const sortOrderValue = sortOrder || 'desc';
 
@@ -138,7 +169,7 @@ export class TasksService {
 
     const [tasks, total] = await Promise.all([
       this.prisma.task.findMany({
-        where,
+        where: where as any,
         include: {
           assignee: {
             select: {
@@ -156,11 +187,11 @@ export class TasksService {
             },
           },
         },
-        orderBy,
+        orderBy: orderBy as any,
         skip,
-        take: limit,
+        take: limitNum,
       }),
-      this.prisma.task.count({ where }),
+      this.prisma.task.count({ where: where as any }),
     ]);
 
     return {
