@@ -5,7 +5,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY yarn.lock ./
 
-RUN yarn install
+RUN corepack enable
+RUN yarn
 
 COPY . .
 
@@ -23,7 +24,8 @@ WORKDIR /app
 COPY package*.json ./
 COPY yarn.lock ./
 
-RUN yarn install --production && yarn cache clean
+RUN corepack enable
+RUN yarn && yarn cache clean
 
 COPY . .
 
