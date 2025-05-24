@@ -8,15 +8,8 @@ services:
       - fromGroup: minijira-api-env
     autoDeploy: true
     healthCheckPath: /api/v1/health
-    buildCommand: |
-      yarn install --frozen-lockfile
-      yarn build
-    startCommand: |
-      npx prisma migrate deploy
-      node dist/main.js
-
 # Notes:
 # - Set up your environment variables in a group called 'minijira-api-env' in the Render dashboard.
 # - The health check path should match your API's health endpoint.
-# - Adjust build/start commands if your setup differs.
+# - Adjust your Dockerfile to handle build and start commands.
 # - If you use a database, add a Render PostgreSQL service and set DATABASE_URL in your env group.
