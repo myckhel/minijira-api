@@ -1,7 +1,9 @@
 {
+  "include": ["src/**/*.ts", "prisma/**/*.ts"],
   "compilerOptions": {
     "module": "commonjs",
     "declaration": true,
+    "types": ["@prisma/client"],
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
